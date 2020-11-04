@@ -2,6 +2,7 @@
 - hosts: webservers 
   become: True
   tasks:
+  
     - name: Cleaning Environment
       shell: sudo rm /var/www/html/index.html
       ignore_erros: true
