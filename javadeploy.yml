@@ -1,0 +1,53 @@
+--- 
+- name: "Java Deployment"
+  become: true
+  hosts: webservers
+  tasks: 
+    - 
+      ignore_errors: true
+      name: "Cleaning Environment"
+      shell: "sudo rm /home/roshan/JavaProject/Hello.java"
+    - 
+      name: "Check if java is installed"
+      package_facts: 
+        manager: auto
+    - 
+      debug: 
+        msg: "Java-1.8.0 found"
+      name: "Java test result"
+      when: "'java-1.8.0-openjdk-devel' in ansible_facts.packages"
+    - 
+      debug: 
+        msg: "Java-1.8.0 not found"
+      name: "Java test result"
+      when: "'java-1.8.0-openjdk-devel' not in ansible_facts.packages"
+    - 
+      name: "Install Java-1.8.0 packages"
+      when: "'java-1.8.0-openjdk-devel' not in ansible_facts.packages"
+      yum: 
+        name: java-1.8.0-openjdk-devel
+        state: present
+        
+    -
+      name: example copying file with owner and permissions
+      copy:
+        src: Hello.java
+        dest: /home/roshan/JavaProject
+        owner: roshan
+        group: roshan
+        mode: 0777
+    - 
+      name: "Compiling Java Application"
+      shell:
+        cmd: javac Hello.java
+        creates: Hello.class
+        chdir: /home/roshan/JavaProject
+    - 
+      name: "Deploying Application"
+      shell:
+        cmd: java Hello
+        chdir: /home/roshan/JavaProject
+      register: result
+
+    - debug:
+        var: result.stdout
