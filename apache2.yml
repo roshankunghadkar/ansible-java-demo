@@ -3,8 +3,7 @@
   become: True
   tasks:
     - name: Cleaning Environment
-      shell: sudo rm index.html
-        chdir: /var/www/html/
+      shell: sudo rm /var/www/html/index.html
       ignore_erros: true
       
     
