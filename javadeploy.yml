@@ -7,6 +7,7 @@
       ignore_errors: true
       name: "Cleaning Environment"
       shell: "sudo rm /home/roshan/JavaProject/Hello.java"
+      shell: "sudo rm /home/roshan/JavaProject/Hello.class"
     - 
       name: "Check if java is installed"
       package_facts: 
