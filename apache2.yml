@@ -4,7 +4,7 @@
   hosts: webservers
   tasks: 
     - 
-      ignore_erros: true
+      ignore_errors: true
       name: "Cleaning Environment"
       shell: "sudo rm /var/www/html/index.html"
     - 
