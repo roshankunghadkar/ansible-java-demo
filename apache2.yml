@@ -7,16 +7,16 @@
       ignore_erros: true
       
     
-    - name: "Check if apache is installed"
+    - name: Check if apache is installed
       package_facts:
         manager: auto
 
-    - name: "apache test result"
+    - name: apache test result
       debug:
         msg: "apache found"
       when: "'httpd' in ansible_facts.packages"
 
-    - name: "apache test result"
+    - name: apache test result
       debug:
         msg: "apache not found"
       when: "'httpd' not in ansible_facts.packages"
