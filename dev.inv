@@ -1,2 +1,2 @@
 [webservers]
-192.168.225.208 ansible_user=roshan ansible_ssh_pass=Roshan79 ansible_sudo_pass=Roshan79
+192.168.225.209 ansible_user=roshan ansible_ssh_pass=Roshan79 ansible_sudo_pass=Roshan79
