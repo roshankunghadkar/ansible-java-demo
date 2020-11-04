@@ -1,41 +1,40 @@
----
-- hosts: webservers 
-  become: True
-  tasks:
-  
-    - name: Cleaning Environment
-      shell: sudo rm /var/www/html/index.html
+--- 
+- 
+  become: true
+  hosts: webservers
+  tasks: 
+    - 
       ignore_erros: true
-      
-    
-    - name: Check if apache is installed
-      package_facts:
+      name: "Cleaning Environment"
+      shell: "sudo rm /var/www/html/index.html"
+    - 
+      name: "Check if apache is installed"
+      package_facts: 
         manager: auto
-
-    - name: apache test result
-      debug:
+    - 
+      debug: 
         msg: "apache found"
+      name: "apache test result"
       when: "'httpd' in ansible_facts.packages"
-
-    - name: apache test result
-      debug:
+    - 
+      debug: 
         msg: "apache not found"
+      name: "apache test result"
       when: "'httpd' not in ansible_facts.packages"
-      
-    - name: Install apache packages
-      yum:
-        name: "httpd"
-        state: "present"
+    - 
+      name: "Install apache packages"
       when: "'httpd' not in ansible_facts.packages"
-      
-    - name: Start Apache server
-      service:
+      yum: 
+        name: httpd
+        state: present
+    - 
+      name: "Start Apache server"
+      service: 
+        enabled: true
         name: httpd
         state: started
-        enabled: True
-        
-    - name: Deploy static website
-      copy:
-        src: index.html
+    - 
+      copy: 
         dest: /var/www/html/
-...
+        src: index.html
+      name: "Deploy static website"
