@@ -25,7 +25,7 @@
     - 
       name: "Install Java-1.8.0 packages"
       when: "'java-1.8.0-openjdk-devel' not in ansible_facts.packages"
-      yum: 
+      apt: 
         name: java-1.8.0-openjdk-devel
         state: present
         
