@@ -6,8 +6,8 @@
     - 
       ignore_errors: true
       name: "Cleaning Environment"
-      shell: "sudo rm /home/roshan/JavaProject/Hello.java"
-      shell: "sudo rm /home/roshan/JavaProject/Hello.class"
+      shell: "sudo rm /home/ubuntu/Hello.java"
+      shell: "sudo rm /home/ubuntu/Hello.class"
     - 
       name: "Check if java is installed"
       package_facts: 
@@ -33,21 +33,21 @@
       name: example copying file with owner and permissions
       copy:
         src: Hello.java
-        dest: /home/roshan/JavaProject
-        owner: roshan
-        group: roshan
+        dest: /home/ubuntu/
+        owner: ubuntu
+        group: ubuntu
         mode: 0777
     - 
       name: "Compiling Java Application"
       shell:
         cmd: javac Hello.java
         creates: Hello.class
-        chdir: /home/roshan/JavaProject
+        chdir: /home/ubuntu
     - 
       name: "Deploying Application"
       shell:
         cmd: java Hello
-        chdir: /home/roshan/JavaProject
+        chdir: /home/ubuntu
       register: result
 
     - debug:
